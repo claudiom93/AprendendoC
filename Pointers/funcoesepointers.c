@@ -1,16 +1,26 @@
 #include <stdio.h>
+// Funcoes podem ser chamadas atraves de pointers
 
-//Aqui vemos como usar pointers para acessar variaveis fora do escopo
-void trocar(int *a, int *b){ //Recebe 2 enderecos de memoria de numeros inteiros
-    int temp; //Inicializa variavel temporaria
-    temp = *b; //Armazeno o valor que esta localizado no endereco de memoria b
-    *b = *a; //Troca o valor que esta no endereco de memoria b pelo que esta no endereco de memoria a
-    *a = temp; //Troca o valor que esta no enderco de memoria a pelo valor que esta armazenado em temp
+int printint(int a){
+    return a;
 }
+
+int add(int a, int b){
+    return a + b;
+}
+
+int mult (int a, int b){
+    return a*b;
+}
+
+int sub(int a, int b){
+    return a - b;
+}
+
 int main(){
-    int x =3;
-    int y = 4;
-    trocar(&x,&y);
-    printf("Novo valor de x = %d.\n Novo valor de y = %d.",x,y);
+    int (*p1)(int) = printint; //Declaramos o pointer da funcao dessa maneira
+    int (*ops[3])(int,int) = {add, mult,sub}; // Podemos criar um array de funcoes dessa maneira
+    printf("%d\n",p1(2));
+    printf("%d",ops[1](2,3));
     return 0;
 }
